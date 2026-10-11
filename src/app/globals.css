@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-paper text-graphite antialiased; font-size: 1rem; line-height: 1.65; }
+  ::selection { @apply bg-signal text-white; }
+  :focus-visible { outline: 2px solid theme("colors.graphite"); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  /* Archivo's width axis carries the industrial voice: wide for headings, normal for reading. */
+  .type-wide { font-stretch: 125%; font-variation-settings: "wdth" 125; }
+  .type-narrow { font-stretch: 80%; font-variation-settings: "wdth" 80; }
+
+  .container-page { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
+
+  .h-display,
+  .h-section {
+    position: relative;
+    isolation: isolate;
+    transition: color 220ms ease, text-shadow 220ms ease, background 220ms ease;
+  }
+
+  .h-display:hover,
+  .h-section:hover {
+    color: #20262b;
+    text-shadow: 0 0 0.7rem rgba(237, 126, 32, 0.28);
+    background: radial-gradient(ellipse at 18% 52%, rgba(241, 145, 61, 0.18), rgba(241, 145, 61, 0) 68%);
+  }
+
+  .h-display { @apply type-wide font-bold tracking-tight text-graphite; font-size: clamp(2.15rem, 4.2vw, 3.65rem); line-height: 1.04; }
+  .h-section { @apply type-wide font-bold tracking-tight text-graphite; font-size: clamp(1.6rem, 2.8vw, 2.25rem); line-height: 1.12; }
+  .h-item { @apply font-semibold text-graphite text-lg leading-snug; }
+  .lede { @apply text-[1.05rem] text-slate max-w-prose; line-height: 1.65; }
+
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-[3px] px-5 py-2.5 font-semibold transition-colors; }
+  .btn-primary { @apply btn bg-signal text-white hover:bg-signal-dark; }
+  .btn-secondary { @apply btn border border-graphite text-graphite hover:bg-graphite hover:text-white; }
+
+  .link { @apply font-semibold text-graphite underline decoration-signal decoration-2 underline-offset-4 hover:text-signal; }
+}
