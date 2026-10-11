@@ -22,8 +22,19 @@ export function SiteHeader() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-steel-dark/70 bg-paper/98 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-steel-dark/70 bg-paper/95 backdrop-blur">
       <ControlBar />
+      <div className="hidden bg-graphite text-[0.8rem] text-steel/80 lg:block">
+        <div className="container-page flex h-9 items-center justify-between gap-6">
+          <p>Packaging machinery manufacturer &middot; {company.address.city}, India &middot; Since {company.founded}</p>
+          <div className="flex items-center gap-6">
+            <a href={`mailto:${company.email}`} className="hover:text-white">{company.email}</a>
+            {company.phones.map((p) => (
+              <a key={p} href={telHref(p)} className="tabular-nums hover:text-white">{p}</a>
+            ))}
+          </div>
+        </div>
+      </div>
       <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
         <Link href="/" className="type-wide text-[1.35rem] font-extrabold tracking-tight text-graphite">
           Canara<span className="text-signal">Flex</span>
@@ -35,8 +46,8 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               aria-current={isActive(item.href) ? "page" : undefined}
-              className={`text-[0.95rem] font-medium transition-colors hover:text-signal ${
-                isActive(item.href) ? "text-signal" : "text-graphite"
+              className={`relative py-6 text-[0.95rem] font-medium transition-colors hover:text-signal after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 ${
+                isActive(item.href) ? "text-graphite after:bg-signal" : "text-graphite after:bg-transparent"
               }`}
             >
               {item.label}
@@ -44,11 +55,8 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 lg:flex">
-          <a href={telHref(company.phones[0])} className="text-sm font-medium text-slate hover:text-graphite">
-            {company.phones[0]}
-          </a>
-          <Link href="/contact" className="btn-primary py-2.5 text-sm">
+        <div className="hidden items-center lg:flex">
+          <Link href="/contact" className="btn-primary px-5 py-2.5 text-sm">
             Request a quote
           </Link>
         </div>

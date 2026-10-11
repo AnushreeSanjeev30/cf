@@ -23,6 +23,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
+        eyebrow="About us"
         title={`Building packaging machinery in Bengaluru since ${company.founded}.`}
         intro="Canara Flex designs and manufactures rotogravure printing, lamination, slitting and inspection machines for flexible packaging converters in India and abroad."
       />
@@ -42,6 +43,48 @@ export default function AboutPage() {
             Every machine is built to the customer&rsquo;s specification: film types, web widths, colours and speeds are
             agreed before we start, and the finished machine is run and tested in our plant before it ships.
           </p>
+        </div>
+      </section>
+
+      <section id="founder" className="mt-24 scroll-mt-28 border-y border-steel-dark bg-mist py-20" aria-labelledby="founder-heading">
+        <div className="container-page grid gap-10 lg:grid-cols-[260px_1fr] lg:gap-16">
+          <div>
+            <Media
+              image={{ src: "/images/founder-sanjeev-sawant.png", alt: "Sanjeev Sawant, founder of Canara Flex" }}
+              label="Sanjeev Sawant"
+              ratio="1/1"
+              sizes="260px"
+              className="w-full max-w-[260px] p-2 sm:p-3"
+            />
+            <p className="mt-4 text-lg font-semibold">Sanjeev Sawant</p>
+            <p className="text-sm text-slate">Founder, Canara Flex</p>
+          </div>
+          <div className="max-w-prose">
+            <p className="eyebrow text-signal">Our founder</p>
+            <h2 id="founder-heading" className="h-section mt-3">Designed by someone who knows the machine inside out.</h2>
+            <div className="mt-6 space-y-4">
+              <p>
+                Sanjeev Sawant founded Canara Flex in {company.founded}, after nine years designing rotogravure machines
+                in the mechanical engineering industry.
+              </p>
+              <p>
+                At the drawing board he learned how much a machine&rsquo;s design decides its life on the shop floor:
+                how quickly it sets up, how often it stops, and what it costs to run. He also saw converters paying a
+                premium for that quality, or settling for less to stay within budget. Canara Flex was his answer:
+                machines designed by someone who knows them inside out, priced fairly, and backed by service.
+              </p>
+              <p>
+                That design background still shapes how the company works. Our designers work alongside the shop
+                floor and the test bay, so problems are solved before a machine ships rather than after.
+              </p>
+            </div>
+            <blockquote className="mt-8 border-l-2 border-signal pl-5 text-lg leading-relaxed text-graphite">
+              <p>
+                &ldquo;When I started Canara Flex, the promise was simple: the right price, and no compromise on
+                quality. Every machine that leaves our factory has to keep that promise.&rdquo;
+              </p>
+            </blockquote>
+          </div>
         </div>
       </section>
 

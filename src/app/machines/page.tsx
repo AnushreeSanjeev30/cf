@@ -15,6 +15,7 @@ export default function MachinesPage() {
   return (
     <>
       <PageHeader
+        eyebrow="Machines"
         title="Machines for every stage of flexible packaging."
         intro="Every machine is built to order. Pick the stage you're equipping, then ask us for a configuration that fits your film, widths and speeds."
       />

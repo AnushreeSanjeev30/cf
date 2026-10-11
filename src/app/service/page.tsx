@@ -23,6 +23,7 @@ export default function ServicePage() {
   return (
     <>
       <PageHeader
+        eyebrow="Sales and service"
         title="Sales and service across India."
         intro="Our teams in five cities handle everything after you place the order: installation, training, spares and breakdown support."
       />

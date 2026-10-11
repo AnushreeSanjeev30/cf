@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
-      <PageHeader title="Machines on the shop floor." intro="Photos and videos from our factory and customer installations." />
+      <PageHeader eyebrow="Gallery" title="Machines on the shop floor." intro="Photos and videos from our factory and customer installations." />
 
       {galleryVideos.length > 0 && (
         <section className="container-page" aria-labelledby="videos-heading">
