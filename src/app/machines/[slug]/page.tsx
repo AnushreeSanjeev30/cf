@@ -48,6 +48,8 @@ export default function MachinePage({ params }: Props) {
     <>
       <nav aria-label="Breadcrumb" className="container-page pt-8 text-sm text-slate">
         <ol className="flex flex-wrap gap-2">
+          <li><Link href="/" className="hover:text-graphite">Home</Link></li>
+          <li aria-hidden>/</li>
           <li><Link href="/machines" className="hover:text-graphite">Machines</Link></li>
           <li aria-hidden>/</li>
           <li><Link href={`/machines#stage-${stage.id}`} className="hover:text-graphite">{stage.name}</Link></li>
