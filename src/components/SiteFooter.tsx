@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "./Logo";
 import { company, telHref } from "@/content/company";
 import { machines } from "@/content/machines";
 
@@ -14,9 +15,7 @@ export function SiteFooter() {
     <footer className="bg-ink text-steel">
       <div className="container-page grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.4fr_1.2fr_0.9fr_1fr]">
         <div>
-          <p className="type-wide text-2xl font-extrabold text-white">
-            Canara<span className="text-signal">Flex</span>
-          </p>
+          <Logo inverted />
           <p className="mt-4 max-w-[38ch] text-[0.95rem] leading-relaxed text-steel/75">
             Manufacturers of rotogravure printing, lamination, slitting and inspection machines for flexible
             packaging. {company.address.city}, since {company.founded}.

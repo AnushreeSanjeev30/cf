@@ -3,15 +3,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ControlBar } from "./ColourStrip";
+import { Logo } from "./Logo";
 import { company, telHref } from "@/content/company";
 
 const nav = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About us" },
   { href: "/machines", label: "Machines" },
-  { href: "/about", label: "About" },
   { href: "/service", label: "Service" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Contact us" },
 ];
 
 export function SiteHeader() {
@@ -22,48 +23,47 @@ export function SiteHeader() {
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-40 border-b border-steel-dark/70 bg-paper/95 backdrop-blur">
-      <ControlBar />
-      <div className="hidden bg-graphite text-[0.8rem] text-steel/80 lg:block">
-        <div className="container-page flex h-9 items-center justify-between gap-6">
-          <p>Packaging machinery manufacturer &middot; {company.address.city}, India &middot; Since {company.founded}</p>
-          <div className="flex items-center gap-6">
-            <a href={`mailto:${company.email}`} className="hover:text-white">{company.email}</a>
-            {company.phones.map((p) => (
-              <a key={p} href={telHref(p)} className="tabular-nums hover:text-white">{p}</a>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
-        <Link href="/" className="type-wide text-[1.35rem] font-extrabold tracking-tight text-graphite">
-          Canara<span className="text-signal">Flex</span>
+    <header className="sticky top-0 z-40 bg-paper shadow-[0_2px_8px_rgba(0,0,0,0.08)]">
+      <div className="container-page flex items-center justify-between gap-6 py-3 lg:py-2.5">
+        <Link href="/" aria-label={`${company.name} home`} className="shrink-0">
+          <Logo />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={`relative py-6 text-[0.95rem] font-medium transition-colors hover:text-signal after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 ${
-                isActive(item.href) ? "text-graphite after:bg-signal" : "text-graphite after:bg-transparent"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden flex-col items-end gap-2.5 lg:flex">
+          <p className="text-[0.82rem] text-slate">
+            Need help? Call:{" "}
+            {company.phones.map((p, i) => (
+              <span key={p}>
+                {i > 0 && " | "}
+                <a href={telHref(p)} className="tabular-nums text-graphite hover:text-signal">{p}</a>
+              </span>
+            ))}
+            {" | "}Email:{" "}
+            <a href={`mailto:${company.email}`} className="text-graphite hover:text-signal">{company.email}</a>
+          </p>
 
-        <div className="hidden items-center lg:flex">
-          <Link href="/contact" className="btn-primary px-5 py-2.5 text-sm">
-            Request a quote
-          </Link>
+          <nav aria-label="Main">
+            <ul className="flex items-center gap-1">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    aria-current={isActive(item.href) ? "page" : undefined}
+                    className={`block rounded-[2px] px-3.5 py-2 text-[0.82rem] font-bold uppercase tracking-[0.08em] transition-colors ${
+                      isActive(item.href) ? "bg-signal text-white" : "text-signal hover:bg-signal/10"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
         <button
           type="button"
-          className="-mr-2 p-2 md:hidden"
+          className="-mr-2 p-2 lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((o) => !o)}
@@ -76,22 +76,26 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Main" className="border-t border-steel-dark/70 bg-paper md:hidden">
+        <nav id="mobile-nav" aria-label="Main" className="border-t border-steel-dark/70 bg-paper lg:hidden">
           <ul className="container-page py-3">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`block py-3 text-lg font-medium ${isActive(item.href) ? "text-signal" : "text-graphite"}`}
+                  className={`block rounded-[2px] px-3 py-3 text-[0.95rem] font-bold uppercase tracking-[0.08em] ${
+                    isActive(item.href) ? "bg-signal text-white" : "text-signal"
+                  }`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li className="flex flex-col gap-3 pb-3 pt-4">
-              <Link href="/contact" className="btn-primary">Request a quote</Link>
-              <a href={telHref(company.phones[0])} className="btn-secondary">Call {company.phones[0]}</a>
+            <li className="flex flex-col gap-1 border-t border-steel-dark/70 px-3 pb-2 pt-4 text-sm text-slate">
+              {company.phones.map((p) => (
+                <a key={p} href={telHref(p)} className="py-1 tabular-nums text-graphite">Call {p}</a>
+              ))}
+              <a href={`mailto:${company.email}`} className="py-1 text-graphite">{company.email}</a>
             </li>
           </ul>
         </nav>

@@ -3,7 +3,7 @@ import { company, telHref } from "@/content/company";
 
 export function QuoteBand({ className = "" }: { className?: string }) {
   return (
-    <section className={`quote-band bg-graphite text-white ${className}`}>
+    <section className={`quote-band flush-bottom bg-graphite text-white ${className}`}>
       <div className="container-page grid gap-8 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr] lg:items-center">
         <div>
           <p className="eyebrow text-signal">Enquiries</p>

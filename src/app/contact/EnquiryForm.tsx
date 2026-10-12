@@ -11,13 +11,12 @@ type Props = {
 
 type Status = { state: "idle" | "sending" } | { state: "sent"; reference?: string } | { state: "error"; message: string };
 
-const field = "mt-1 block h-10 w-full rounded-[3px] border border-steel-dark bg-paper px-3 text-[0.9rem] text-graphite shadow-sm shadow-black/[0.02] placeholder:text-slate/55 transition-colors hover:border-slate/50 focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15 aria-[invalid=true]:border-signal";
-const label = "block text-[0.8rem] font-semibold text-graphite";
-const optional = <span className="font-normal text-slate"> (optional)</span>;
+const field = "block h-11 w-full rounded-[3px] border border-steel-dark bg-paper px-3 text-[0.9rem] text-graphite shadow-sm shadow-black/[0.02] placeholder:text-slate/70 transition-colors hover:border-slate/50 focus:border-graphite focus:outline-none focus:ring-2 focus:ring-graphite/15 aria-[invalid=true]:border-signal";
 
 export function EnquiryForm({ machines, defaultMachine, defaultTopic }: Props) {
   const [status, setStatus] = useState<Status>({ state: "idle" });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [machine, setMachine] = useState(defaultMachine);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +34,7 @@ export function EnquiryForm({ machines, defaultMachine, defaultTopic }: Props) {
       if (res.ok) {
         setStatus({ state: "sent", reference: body.reference });
         form.reset();
+        setMachine("");
         return;
       }
       if (body.errors) setErrors(body.errors);
@@ -46,7 +46,7 @@ export function EnquiryForm({ machines, defaultMachine, defaultTopic }: Props) {
 
   if (status.state === "sent") {
     return (
-      <div role="status" className="border-l-4 border-signal bg-mist p-6">
+      <div role="status" className="border-l-4 border-signal bg-paper p-6">
         <p className="h-item">Thank you. Your enquiry has been received.</p>
         {status.reference && (
           <p className="mt-2 text-[0.95rem]">
@@ -69,15 +69,15 @@ export function EnquiryForm({ machines, defaultMachine, defaultTopic }: Props) {
   const aria = (name: string) => (errors[name] ? { "aria-invalid": true, "aria-describedby": `${name}-error` } : {});
 
   return (
-    <form onSubmit={onSubmit} noValidate className="space-y-5">
-      <fieldset>
-        <legend className={label}>Enquiry type</legend>
-        <div className="mt-1.5 inline-flex rounded-[3px] border border-steel-dark p-0.5">
+    <form onSubmit={onSubmit} noValidate className="space-y-3">
+      <fieldset className="pb-1">
+        <legend className="sr-only">Enquiry type</legend>
+        <div className="inline-flex rounded-[3px] border border-steel-dark bg-paper p-0.5">
           {[
             { value: "quote", text: "New machine quote" },
             { value: "service", text: "Service or spares" },
           ].map((o) => (
-            <label key={o.value} className="cursor-pointer rounded-[2px] px-4 py-1.5 text-[0.85rem] font-medium text-slate transition-colors hover:text-graphite has-[:checked]:bg-graphite has-[:checked]:text-white has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-graphite/30">
+            <label key={o.value} className="cursor-pointer rounded-[2px] px-4 py-1.5 text-[0.85rem] font-medium text-slate transition-colors hover:text-graphite has-[:checked]:bg-signal has-[:checked]:text-white has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-signal/30">
               <input type="radio" name="topic" value={o.value} defaultChecked={o.value === defaultTopic} className="sr-only" />
               {o.text}
             </label>
@@ -85,49 +85,53 @@ export function EnquiryForm({ machines, defaultMachine, defaultTopic }: Props) {
         </div>
       </fieldset>
 
-      <div className="grid gap-x-4 gap-y-5 sm:grid-cols-2">
+      <div>
+        <label htmlFor="name" className="sr-only">Your name</label>
+        <input id="name" name="name" autoComplete="name" required placeholder="Your Name" className={field} {...aria("name")} />
+        {err("name")}
+      </div>
+      <div>
+        <label htmlFor="email" className="sr-only">Your email</label>
+        <input id="email" name="email" type="email" autoComplete="email" placeholder="Your Email" className={field} {...aria("email")} />
+        {err("email")}
+      </div>
+      <div>
+        <label htmlFor="phone" className="sr-only">Your phone number</label>
+        <input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="Your Phone Number" className={field} {...aria("phone")} />
+        {err("phone")}
+      </div>
+      <div className="grid gap-3 sm:grid-cols-2">
         <div>
-          <label htmlFor="machine" className={label}>Machine</label>
-          <select id="machine" name="machine" defaultValue={defaultMachine} className={field}>
-            <option value="">Not sure yet</option>
-            {machines.map((m) => <option key={m.slug} value={m.slug}>{m.name}</option>)}
-          </select>
+          <label htmlFor="company" className="sr-only">Company (optional)</label>
+          <input id="company" name="company" autoComplete="organization" placeholder="Company (optional)" className={field} />
         </div>
         <div>
-          <label htmlFor="city" className={label}>City{optional}</label>
-          <input id="city" name="city" autoComplete="address-level2" className={field} />
-        </div>
-        <div>
-          <label htmlFor="name" className={label}>Full name</label>
-          <input id="name" name="name" autoComplete="name" required className={field} {...aria("name")} />
-          {err("name")}
-        </div>
-        <div>
-          <label htmlFor="company" className={label}>Company{optional}</label>
-          <input id="company" name="company" autoComplete="organization" className={field} />
-        </div>
-        <div>
-          <label htmlFor="phone" className={label}>Phone</label>
-          <input id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel" className={field} {...aria("phone")} />
-          {err("phone")}
-        </div>
-        <div>
-          <label htmlFor="email" className={label}>Email</label>
-          <input id="email" name="email" type="email" autoComplete="email" className={field} {...aria("email")} />
-          {err("email")}
+          <label htmlFor="city" className="sr-only">City (optional)</label>
+          <input id="city" name="city" autoComplete="address-level2" placeholder="City (optional)" className={field} />
         </div>
       </div>
-      <p className="-mt-3 text-xs text-slate">Provide a phone number, an email, or both.</p>
-
       <div>
-        <label htmlFor="message" className={label}>Requirement details</label>
+        <label htmlFor="machine" className="sr-only">Machine</label>
+        <select
+          id="machine"
+          name="machine"
+          value={machine}
+          onChange={(ev) => setMachine(ev.target.value)}
+          className={`${field} ${machine ? "" : "!text-slate/70"}`}
+        >
+          <option value="">Machine of interest (not sure yet)</option>
+          {machines.map((m) => <option key={m.slug} value={m.slug}>{m.name}</option>)}
+        </select>
+      </div>
+      <div>
+        <label htmlFor="message" className="sr-only">Your message</label>
         <textarea
           id="message"
           name="message"
-          rows={4}
+          rows={3}
           required
-          className={`${field} h-auto py-2 leading-relaxed`}
-          placeholder="Film types, web width, number of colours, target speed, or the problem you're seeing"
+          className={`${field} h-auto py-2.5 leading-relaxed`}
+          placeholder="Your Message: film type, web width, colours, target speed, or the problem you're seeing"
           {...aria("message")}
         />
         {err("message")}
@@ -140,15 +144,12 @@ export function EnquiryForm({ machines, defaultMachine, defaultTopic }: Props) {
       </div>
 
       {status.state === "error" && (
-        <p role="alert" className="border-l-4 border-signal bg-mist px-4 py-3 text-sm">{status.message}</p>
+        <p role="alert" className="border-l-4 border-signal bg-paper px-4 py-3 text-sm">{status.message}</p>
       )}
 
-      <div className="flex flex-col gap-3 border-t border-steel-dark pt-5 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-slate">We will get back to you by phone or email.</p>
-        <button type="submit" className="btn-primary px-6 py-2.5 text-sm" disabled={status.state === "sending"}>
-          {status.state === "sending" ? "Submitting…" : "Submit enquiry"}
-        </button>
-      </div>
+      <button type="submit" className="btn-primary w-full py-3 text-sm uppercase tracking-[0.08em]" disabled={status.state === "sending"}>
+        {status.state === "sending" ? "Sending…" : "Send message"}
+      </button>
     </form>
   );
 }

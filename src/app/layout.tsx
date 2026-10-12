@@ -42,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <SiteHeader />
-        <main id="main" className="pb-24 has-[>.quote-band:last-child]:pb-0">{children}</main>
+        <main id="main" className="pb-24 has-[>.flush-bottom:last-child]:pb-0">{children}</main>
         <SiteFooter />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </body>
