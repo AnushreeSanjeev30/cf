@@ -49,8 +49,37 @@ Search the project for `TODO` to find everything waiting on the client.
 is emailed to `ENQUIRY_TO` (reply-to is the customer's email). Without it, enquiries are
 only logged to the server console. A hidden honeypot field filters basic spam bots.
 
+If `SHEET_WEBHOOK_URL` is set, every enquiry is also added as a row in a Google Sheet (see below).
+An enquiry counts as received if it reaches the sheet or the email; each one gets a reference
+number like `CF-261012-4K7Q` that is shown to the customer, included in the email subject and
+recorded in the sheet.
+
 Links like `/contact?machine=dry-lamination` pre-select the machine;
 `/contact?topic=service` switches the form to a service request.
+
+## Enquiry sheet
+
+Each quote or service request is recorded in a Google Sheet with the date and time (IST), a
+reference number, the customer's details, and three columns for the person following up:
+**Status** (a dropdown: New, Contacted, Quote sent, In progress, Won, Lost, Closed), **Assigned to**
+and **Follow-up notes**. The sheet can be shared with the team and downloaded as Excel at any time
+(File → Download → Microsoft Excel).
+
+One-time setup, about five minutes:
+
+1. Create a new Google Sheet (for example "Canara Flex enquiries") with the company Google account.
+2. Open **Extensions → Apps Script**, delete the sample code, paste in
+   `integrations/enquiry-sheet.gs` and save.
+3. In Apps Script, open **Project Settings → Script properties**, add a property named `SECRET`
+   and give it a long random value (a password generator works).
+4. Click **Deploy → New deployment**, choose type **Web app**, set *Execute as* to **Me** and
+   *Who has access* to **Anyone**, then **Deploy** and approve the permissions prompt.
+5. Copy the web app URL (ends in `/exec`). In Vercel, add the environment variables
+   `SHEET_WEBHOOK_URL` (that URL) and `SHEET_WEBHOOK_SECRET` (the same value as `SECRET`), then redeploy.
+
+The **Enquiries** tab and its headings are created automatically on the first submission. To get an
+alert for each new row, use **Tools → Notification settings** in the sheet. If you later change the
+script, use **Deploy → Manage deployments → Edit → New version** so the URL stays the same.
 
 ## Old URLs
 

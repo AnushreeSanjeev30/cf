@@ -37,10 +37,15 @@ const strengths = [
   },
 ];
 
-const productSlides = galleryImages.slice(0, 8).map((image, index) => ({
-  ...image,
-  title: ["Rotogravure printing press", "RG 250 printing press", "Factory-built machinery", "Canara Flex team", "Assembly and engineering", "Assembly and engineering", "Assembly and engineering", "Shop floor equipment"][index],
-}));
+// Hero slider. Swap in the client's best machine photos as they arrive.
+const heroSlides = [
+  { ...heroPhoto, title: "Rotogravure printing press" },
+  { ...galleryImages[0], title: "RG 3000 shaftless rotogravure" },
+  { ...galleryImages[4], title: "Assembly and engineering" },
+  { ...galleryImages[5], title: "Assembly and engineering" },
+  { ...galleryImages[6], title: "Machine build in progress" },
+  { ...galleryImages[7], title: "Shop floor" },
+];
 
 export default function HomePage() {
   const flagship = getMachine("shaftless-rotogravure")!;
@@ -61,10 +66,19 @@ export default function HomePage() {
               <Link href="/contact" className="btn-primary">Request a quote</Link>
               <Link href="/machines" className="btn-outline-light">Explore the machines</Link>
             </div>
+            <Link href="/gallery" className="mt-6 inline-block text-sm font-semibold text-steel/80 underline decoration-signal decoration-2 underline-offset-4 hover:text-white">
+              View the photo gallery
+            </Link>
           </div>
 
           <div>
-            <Media image={heroPhoto} label="Rotogravure press" ratio="4/3" priority framed={false} className="shadow-2xl shadow-black/40" />
+            <ProductCarousel
+              slides={heroSlides}
+              label="Built in Bengaluru"
+              ratio="4/3"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="shadow-2xl shadow-black/40"
+            />
             <Link
               href={`/machines/${flagship.slug}`}
               className="group mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/15 pt-4 text-sm"
@@ -83,7 +97,7 @@ export default function HomePage() {
           {stats.map((s) => (
             <div
               key={s.label}
-              className="flex flex-col-reverse border-steel-dark py-8 pr-4 odd:border-r odd:pl-0 even:pl-6 lg:border-r lg:px-8 lg:first:pl-0 lg:last:border-r-0 lg:even:pl-8"
+              className="flex flex-col-reverse border-steel-dark py-8 pr-4 pl-6 odd:border-r odd:pl-0 lg:border-r lg:px-8 lg:odd:pl-8 lg:first:!pl-0 lg:last:border-r-0"
             >
               <dt className="mt-1 text-sm text-slate">{s.label}</dt>
               <dd className="type-wide text-3xl font-bold text-graphite sm:text-4xl">{s.value}</dd>
@@ -174,15 +188,6 @@ export default function HomePage() {
             </dl>
           </div>
         </div>
-      </section>
-
-      {/* Product gallery */}
-      <section className="container-page pb-20 sm:pb-24" aria-labelledby="product-gallery-heading">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <SectionHeading id="product-gallery-heading" eyebrow="Inside the factory" title="Machines built for production" />
-          <Link href="/gallery" className="link">View the gallery</Link>
-        </div>
-        <ProductCarousel slides={productSlides} />
       </section>
 
       {/* Founder */}
