@@ -7,6 +7,7 @@ import { ControlBar } from "./ColourStrip";
 import { company, telHref } from "@/content/company";
 
 const nav = [
+  { href: "/", label: "Home" },
   { href: "/machines", label: "Machines" },
   { href: "/about", label: "About" },
   { href: "/service", label: "Service" },
