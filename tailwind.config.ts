@@ -8,6 +8,7 @@ const config: Config = {
         paper: "#FFFFFF",
         steel: { DEFAULT: "#E8EBEC", dark: "#CDD3D6" },
         mist: "#F5F6F7",
+        cream: "#FDF6EE",
         graphite: "#2A3036",
         ink: "#1C2125",
         slate: "#5B6670",

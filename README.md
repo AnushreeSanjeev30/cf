@@ -91,5 +91,7 @@ script, use **Deploy → Manage deployments → Edit → New version** so the UR
 - Typeface: Archivo (Google Fonts, variable width). Headings use the wide cut (`.type-wide`), body text the normal width.
 - Colours (in `tailwind.config.ts`): signal red `#ED2028` (the existing brand red) for actions only,
   graphite `#2A3036` text, steel `#E8EBEC` panels.
-- Motifs from print production: the colour control bar at the top of every page, crop marks
-  around product photos, and the 8-patch colour strip that shows a press's station count.
+- Logo: `src/components/Logo.tsx` redraws the CF gear mark from the old site as SVG. Replace it
+  with the original artwork if the client has it.
+- Motifs from print production: crop marks around product photos, and the 8-patch colour strip
+  that shows a press's station count.

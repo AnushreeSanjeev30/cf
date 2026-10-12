@@ -14,14 +14,3 @@ export function ColourStrip({ count = 8, className = "", size = "md" }: { count?
     </span>
   );
 }
-
-/** The thin segmented bar along the top of every page. */
-export function ControlBar() {
-  return (
-    <div aria-hidden className="flex h-1.5 w-full">
-      {PATCHES.slice(0, 7).map((c) => (
-        <span key={c} className="flex-1" style={{ background: c }} />
-      ))}
-    </div>
-  );
-}
