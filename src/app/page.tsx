@@ -100,7 +100,7 @@ export default function HomePage() {
               className="flex flex-col-reverse border-steel-dark py-8 pr-4 pl-6 odd:border-r odd:pl-0 lg:border-r lg:px-8 lg:odd:pl-8 lg:first:!pl-0 lg:last:border-r-0"
             >
               <dt className="mt-1 text-sm text-slate">{s.label}</dt>
-              <dd className="type-wide text-3xl font-bold text-graphite sm:text-4xl">{s.value}</dd>
+              <dd className="text-3xl font-medium tracking-tight text-graphite sm:text-4xl">{s.value}</dd>
             </div>
           ))}
         </dl>
@@ -119,7 +119,7 @@ export default function HomePage() {
           {stages.map((stage, i) => (
             <li key={stage.id} className="flex flex-col bg-paper p-6 sm:p-7">
               <span className="text-sm font-bold tabular-nums text-signal">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="type-wide mt-3 text-xl font-bold">{stage.name}</h3>
+              <h3 className="mt-3 text-xl font-medium tracking-tight">{stage.name}</h3>
               <p className="mt-2 text-[0.95rem] text-slate">{stage.what}</p>
               <ul className="mt-auto space-y-2 border-t border-steel-dark pt-5">
                 {machinesByStage(stage.id).map((m) => (
@@ -203,7 +203,7 @@ export default function HomePage() {
           <div className="max-w-3xl">
             <p id="founder-heading" className="eyebrow text-signal">A word from our founder</p>
             <blockquote className="mt-5">
-              <p className="type-wide text-xl font-semibold leading-snug text-graphite sm:text-2xl">
+              <p className="text-xl font-normal leading-snug text-graphite sm:text-2xl">
                 &ldquo;I spent nine years designing rotogravure machines. When I started Canara Flex, the promise was
                 simple: the right price, and no compromise on quality. Every machine that leaves our factory has to
                 keep that promise.&rdquo;
@@ -230,7 +230,7 @@ export default function HomePage() {
           <div>
             <ul className="flex flex-wrap gap-x-8 gap-y-3 border-t-2 border-graphite pt-6">
               {company.serviceCities.map((c) => (
-                <li key={c} className="type-wide text-2xl font-bold">{c}</li>
+                <li key={c} className="text-2xl font-medium tracking-tight">{c}</li>
               ))}
             </ul>
             <Link href="/service" className="link mt-6 inline-block">How service works</Link>

@@ -14,22 +14,20 @@
 }
 
 @layer components {
-  /* Archivo's width axis carries the industrial voice: wide for headings, normal for reading. */
-  .type-wide { font-stretch: 125%; font-variation-settings: "wdth" 125; }
-  .type-narrow { font-stretch: 80%; font-variation-settings: "wdth" 80; }
 
   .container-page { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
 
-  .h-display { @apply type-wide font-bold tracking-tight text-graphite; font-size: clamp(2.15rem, 4.2vw, 3.65rem); line-height: 1.04; }
-  .h-section { @apply type-wide font-bold tracking-tight text-graphite; font-size: clamp(1.6rem, 2.8vw, 2.25rem); line-height: 1.12; }
-  .h-item { @apply font-semibold text-graphite text-lg leading-snug; }
-  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.18em]; }
+  /* Headings are set in regular weight with tight tracking; size, not boldness, carries hierarchy. */
+  .h-display { @apply font-normal text-graphite; font-size: clamp(2.25rem, 4.4vw, 3.5rem); line-height: 1.08; letter-spacing: -0.03em; }
+  .h-section { @apply font-normal text-graphite; font-size: clamp(1.65rem, 2.8vw, 2.25rem); line-height: 1.15; letter-spacing: -0.025em; }
+  .h-item { @apply font-medium text-graphite text-lg leading-snug; letter-spacing: -0.01em; }
+  .eyebrow { @apply text-[0.8rem] font-medium uppercase tracking-[0.08em]; }
   .lede { @apply text-[1.05rem] text-slate max-w-prose; line-height: 1.65; }
 
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-[3px] px-6 py-3 text-[0.95rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-[3px] px-6 py-3 text-[0.95rem] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-60; }
   .btn-primary { @apply btn bg-signal text-white hover:bg-signal-dark; }
   .btn-secondary { @apply btn border border-graphite text-graphite hover:bg-graphite hover:text-white; }
   .btn-outline-light { @apply btn border border-white/40 text-white hover:border-white hover:bg-white hover:text-graphite; }
 
-  .link { @apply font-semibold text-graphite underline decoration-signal decoration-2 underline-offset-4 hover:text-signal; }
+  .link { @apply font-medium text-graphite underline decoration-signal decoration-2 underline-offset-4 hover:text-signal; }
 }

@@ -20,7 +20,7 @@ export default function ContactPage({ searchParams }: Props) {
       <section className="bg-cream" aria-labelledby="form-heading">
         <div className="container-page grid gap-12 py-14 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
           <div>
-            <h1 id="form-heading" className="type-wide text-[1.35rem] font-bold leading-snug text-graphite sm:text-[1.6rem]">
+            <h1 id="form-heading" className="text-[1.35rem] font-medium tracking-tight leading-snug text-graphite sm:text-[1.6rem]">
               {topic === "service"
                 ? "Need service or spares for your machine? Send us the details and our team will contact you."
                 : "If you would like to know more about our machines, feel free to contact us."}
@@ -35,19 +35,19 @@ export default function ContactPage({ searchParams }: Props) {
           </div>
 
           <aside aria-labelledby="details-heading" className="lg:pt-2">
-            <h2 id="details-heading" className="type-wide text-lg font-bold text-graphite">Contact us:</h2>
+            <h2 id="details-heading" className="text-lg font-medium tracking-tight text-graphite">Contact us:</h2>
             <dl className="mt-7 space-y-7">
               <div>
                 <dt className="text-slate">Phone:</dt>
                 {company.phones.map((p) => (
                   <dd key={p}>
-                    <a href={telHref(p)} className="type-wide mt-1 inline-block text-lg font-bold tabular-nums text-graphite hover:text-signal">{p}</a>
+                    <a href={telHref(p)} className="mt-1 inline-block text-lg font-medium tracking-tight tabular-nums text-graphite hover:text-signal">{p}</a>
                   </dd>
                 ))}
               </div>
               <div>
                 <dt className="text-slate">Address:</dt>
-                <dd className="type-wide mt-1 text-lg font-bold leading-snug text-graphite">
+                <dd className="mt-1 text-lg font-medium tracking-tight leading-snug text-graphite">
                   <address className="not-italic">
                     {company.address.line1 && <>{company.address.line1}, </>}
                     {company.address.city}, {company.address.region}, {company.address.country}.
@@ -57,7 +57,7 @@ export default function ContactPage({ searchParams }: Props) {
               <div>
                 <dt className="text-slate">Email address:</dt>
                 <dd>
-                  <a href={`mailto:${company.email}`} className="type-wide mt-1 inline-block text-lg font-bold text-graphite hover:text-signal">
+                  <a href={`mailto:${company.email}`} className="mt-1 inline-block text-lg font-medium tracking-tight text-graphite hover:text-signal">
                     {company.email}
                   </a>
                 </dd>

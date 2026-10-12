@@ -88,7 +88,7 @@ script, use **Deploy → Manage deployments → Edit → New version** so the UR
 
 ## Design notes
 
-- Typeface: Archivo (Google Fonts, variable width). Headings use the wide cut (`.type-wide`), body text the normal width.
+- Typeface: Inter (Google Fonts). Headings are regular weight with tight letter-spacing; hierarchy comes from size, not boldness.
 - Colours (in `tailwind.config.ts`): signal red `#ED2028` (the existing brand red) for actions only,
   graphite `#2A3036` text, steel `#E8EBEC` panels.
 - Logo: `src/components/Logo.tsx` redraws the CF gear mark from the old site as SVG. Replace it

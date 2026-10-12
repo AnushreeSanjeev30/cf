@@ -33,7 +33,7 @@ export default function ServicePage() {
         <ul className="grid border-t-2 border-graphite sm:grid-cols-2 lg:grid-cols-5">
           {company.serviceCities.map((city) => (
             <li key={city} className="border-b border-steel-dark py-6 sm:pr-6">
-              <p className="type-wide text-2xl font-bold">{city}</p>
+              <p className="text-2xl font-medium tracking-tight">{city}</p>
               <p className="mt-1 text-sm text-slate">
                 {city === "Bengaluru" ? "Factory, sales and service" : "Sales and service"}
               </p>
