@@ -63,7 +63,7 @@ export default function MachinePage({ params }: Props) {
 
         <div className="lg:order-1">
           {m.model && <p className="text-lg font-semibold text-signal">{m.model}</p>}
-          <h1 className="type-wide mt-1 text-[clamp(2rem,4.2vw,3.25rem)] font-extrabold leading-[1.02] tracking-tight">
+          <h1 className="mt-1 text-[clamp(2rem,4.2vw,3.25rem)] font-medium leading-[1.02] tracking-tight">
             {m.name}
           </h1>
           <p className="lede mt-5">{m.summary}</p>

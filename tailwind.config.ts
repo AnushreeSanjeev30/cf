@@ -16,7 +16,7 @@ const config: Config = {
         process: { cyan: "#00A0E3", magenta: "#E5007E", yellow: "#FFE000", key: "#1E1E1E" },
       },
       fontFamily: {
-        sans: ["var(--font-archivo)", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+        sans: ["var(--font-inter)", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],
       },
       maxWidth: { prose: "68ch" },
     },

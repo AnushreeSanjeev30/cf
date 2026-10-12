@@ -50,7 +50,7 @@ export function Logo({ tagline = true, inverted = false }: { tagline?: boolean; 
     <span className="flex items-center gap-3">
       <LogoMark className={`h-11 w-11 shrink-0 sm:h-12 sm:w-12 ${inverted ? "text-steel" : "text-[#1E1E1E]"}`} />
       <span className="flex flex-col leading-none">
-        <span className={`type-wide text-[1.35rem] font-extrabold tracking-tight sm:text-[1.55rem] ${inverted ? "text-white" : "text-[#111]"}`}>
+        <span className={`text-[1.35rem] font-bold tracking-[-0.03em] sm:text-[1.55rem] ${inverted ? "text-white" : "text-[#111]"}`}>
           Canara Flex
         </span>
         {tagline && (

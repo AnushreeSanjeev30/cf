@@ -49,7 +49,7 @@ export function SiteHeader() {
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className={`block rounded-[2px] px-3.5 py-2 text-[0.82rem] font-bold uppercase tracking-[0.08em] transition-colors ${
+                    className={`block rounded-[2px] px-3.5 py-2 text-[0.82rem] font-semibold uppercase tracking-[0.06em] transition-colors ${
                       isActive(item.href) ? "bg-signal text-white" : "text-signal hover:bg-signal/10"
                     }`}
                   >
@@ -83,7 +83,7 @@ export function SiteHeader() {
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? "page" : undefined}
-                  className={`block rounded-[2px] px-3 py-3 text-[0.95rem] font-bold uppercase tracking-[0.08em] ${
+                  className={`block rounded-[2px] px-3 py-3 text-[0.95rem] font-semibold uppercase tracking-[0.06em] ${
                     isActive(item.href) ? "bg-signal text-white" : "text-signal"
                   }`}
                 >
